@@ -9,31 +9,70 @@ document.addEventListener("DOMContentLoaded", function () {
     const projectCards = document.querySelectorAll(".project-card");
 
     filters.forEach(filter => {
-
         filter.addEventListener("click", function () {
 
             filters.forEach(btn => btn.classList.remove("active"));
-
             this.classList.add("active");
 
             const selectedCategory = this.dataset.filter;
 
             projectCards.forEach(card => {
-
                 const projectCategory = card.dataset.category;
 
-                if (
+                card.style.display =
                     selectedCategory === "all" ||
                     projectCategory === selectedCategory
-                ) {
-                    card.style.display = "";
-                } else {
-                    card.style.display = "none";
-                }
-
+                        ? ""
+                        : "none";
             });
 
         });
+    });
+
+
+    /* =========================
+       YOUTUBE HOVER PREVIEW
+    ========================= */
+
+    projectCards.forEach(card => {
+
+        const image = card.querySelector(".project-image");
+        const preview = card.querySelector(".video-preview");
+
+        if (!image || !preview) return;
+
+        const videoId = preview.dataset.preview;
+
+        function startPreview() {
+
+            // Disable hover preview on touch devices
+            if (window.matchMedia("(hover: none)").matches) return;
+
+            // Don't start preview if modal is already open
+            const modalIsOpen =
+                document.getElementById("videoModal")?.classList.contains("active");
+
+            if (modalIsOpen || !videoId || preview.src) return;
+
+            preview.src =
+                "https://www.youtube.com/embed/" +
+                encodeURIComponent(videoId) +
+                "?autoplay=1&mute=1&controls=0&loop=1&playlist=" +
+                encodeURIComponent(videoId) +
+                "&playsinline=1&rel=0";
+
+            image.classList.add("preview-active");
+        }
+
+        function stopPreview() {
+
+            preview.src = "";
+            image.classList.remove("preview-active");
+
+        }
+
+        image.addEventListener("mouseenter", startPreview);
+        image.addEventListener("mouseleave", stopPreview);
 
     });
 
@@ -58,6 +97,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (!videoId) return;
 
+                // Stop all hover previews
+                document.querySelectorAll(".video-preview").forEach(preview => {
+                    preview.src = "";
+                    preview.closest(".project-image")
+                        ?.classList.remove("preview-active");
+                });
+
                 videoFrame.src =
                     "https://www.youtube.com/embed/" +
                     encodeURIComponent(videoId) +
@@ -69,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 videoModal.classList.add("active");
-
                 document.body.style.overflow = "hidden";
 
             });
@@ -82,11 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
         function closeVideo() {
 
             videoModal.classList.remove("active");
-
             videoFrame.src = "";
 
             videoContent.classList.remove("vertical-video");
-
             document.body.style.overflow = "";
 
         }
@@ -131,20 +174,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuButton && navLinks) {
 
         menuButton.addEventListener("click", function () {
-
             navLinks.classList.toggle("mobile-open");
-
         });
-
 
         /* CLOSE MOBILE MENU */
 
         document.querySelectorAll(".nav-links a").forEach(link => {
 
             link.addEventListener("click", function () {
-
                 navLinks.classList.remove("mobile-open");
-
             });
 
         });

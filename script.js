@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
    
+
 /* =========================
    YOUTUBE HOVER PREVIEW
 ========================= */
@@ -46,16 +47,15 @@ projectCards.forEach(card => {
 
     image.addEventListener("mouseenter", function () {
 
+        console.log("Mouse entered:", videoId);
+
         if (window.matchMedia("(hover: none)").matches) return;
         if (!videoId) return;
-        if (videoModal && videoModal.classList.contains("active")) return;
 
         preview.src =
             "https://www.youtube.com/embed/" +
             videoId +
-            "?autoplay=1&mute=1&controls=0&loop=1&playlist=" +
-            videoId +
-            "&playsinline=1&rel=0";
+            "?autoplay=1&mute=1&controls=0&playsinline=1&rel=0";
 
         image.classList.add("preview-active");
 
@@ -69,6 +69,7 @@ projectCards.forEach(card => {
     });
 
 });
+
 
 
 

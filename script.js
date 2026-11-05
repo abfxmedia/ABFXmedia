@@ -47,7 +47,6 @@ projectCards.forEach(card => {
 
     image.addEventListener("mouseenter", function () {
 
-        console.log("Mouse entered:", videoId);
 
         if (window.matchMedia("(hover: none)").matches) return;
         if (!videoId) return;

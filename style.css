@@ -2433,3 +2433,24 @@ button {
 .project-image.preview-active .watch-button {
     opacity: 0;
 }
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-image {
+        display: flex;
+        justify-content: center;
+    }
+
+    .about-image .profile-image {
+        max-width: 320px;
+    }
+
+    .stats {
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+}

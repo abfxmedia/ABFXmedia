@@ -30,51 +30,46 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* =========================
-       YOUTUBE HOVER PREVIEW
-    ========================= */
+   
+/* =========================
+   YOUTUBE HOVER PREVIEW
+========================= */
 
-    projectCards.forEach(card => {
+projectCards.forEach(card => {
 
-        const image = card.querySelector(".project-image");
-        const preview = card.querySelector(".video-preview");
+    const image = card.querySelector(".project-image");
+    const preview = card.querySelector(".video-preview");
 
-        if (!image || !preview) return;
+    if (!image || !preview) return;
 
-        const videoId = preview.dataset.preview;
+    const videoId = preview.dataset.preview;
 
-        function startPreview() {
+    image.addEventListener("mouseenter", function () {
 
-            // Disable hover preview on touch devices
-            if (window.matchMedia("(hover: none)").matches) return;
+        if (window.matchMedia("(hover: none)").matches) return;
+        if (!videoId) return;
+        if (videoModal && videoModal.classList.contains("active")) return;
 
-            // Don't start preview if modal is already open
-            const modalIsOpen =
-                document.getElementById("videoModal")?.classList.contains("active");
+        preview.src =
+            "https://www.youtube.com/embed/" +
+            videoId +
+            "?autoplay=1&mute=1&controls=0&loop=1&playlist=" +
+            videoId +
+            "&playsinline=1&rel=0";
 
-            if (modalIsOpen || !videoId || preview.src) return;
-
-            preview.src =
-                "https://www.youtube.com/embed/" +
-                encodeURIComponent(videoId) +
-                "?autoplay=1&mute=1&controls=0&loop=1&playlist=" +
-                encodeURIComponent(videoId) +
-                "&playsinline=1&rel=0";
-
-            image.classList.add("preview-active");
-        }
-
-        function stopPreview() {
-
-            preview.src = "";
-            image.classList.remove("preview-active");
-
-        }
-
-        image.addEventListener("mouseenter", startPreview);
-        image.addEventListener("mouseleave", stopPreview);
+        image.classList.add("preview-active");
 
     });
+
+    image.addEventListener("mouseleave", function () {
+
+        preview.src = "";
+        image.classList.remove("preview-active");
+
+    });
+
+});
+
 
 
     /* =========================

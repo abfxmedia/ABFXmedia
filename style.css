@@ -457,23 +457,6 @@ button {
     opacity: 0.85 !important;
 }
 
-
-.hero-video-overlay {
-    position: absolute !important;
-
-    inset: 0 !important;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,0.55),
-            transparent 30%,
-            transparent 60%,
-            rgba(0,0,0,0.7)
-        ) !important;
-}
-
-
 .hero-video-top {
     position: absolute !important;
 

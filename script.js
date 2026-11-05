@@ -158,35 +158,7 @@ projectCards.forEach(card => {
 
     }
 
-
-    /* =========================
-       MOBILE MENU
-    ========================= */
-
-    const menuButton = document.getElementById("menuButton");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (menuButton && navLinks) {
-
-        menuButton.addEventListener("click", function () {
-            navLinks.classList.toggle("mobile-open");
-        });
-
-        /* CLOSE MOBILE MENU */
-
-        document.querySelectorAll(".nav-links a").forEach(link => {
-
-            link.addEventListener("click", function () {
-                navLinks.classList.remove("mobile-open");
-            });
-
-        });
-
-    }
-
-});
-
-/* ==============================
+    /* ==============================
    HERO YOUTUBE SHOWREEL - 5 VIDEOS
 ============================== */
 
@@ -287,3 +259,33 @@ projectCards.forEach(card => {
     }
 
 })();
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuButton && navLinks) {
+
+        menuButton.addEventListener("click", function () {
+            navLinks.classList.toggle("mobile-open");
+        });
+
+        /* CLOSE MOBILE MENU */
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+
+            link.addEventListener("click", function () {
+                navLinks.classList.remove("mobile-open");
+            });
+
+        });
+
+    }
+
+});
+
+

@@ -2,38 +2,34 @@
    PROJECT FILTER
 ========================= */
 
+/* PROJECT FILTERS */
+
 const filters = document.querySelectorAll(".filter");
-const projects = document.querySelectorAll(".project-card");
+const projectCards = document.querySelectorAll(".project-card");
 
 filters.forEach(filter => {
 
-    filter.addEventListener("click", () => {
+    filter.addEventListener("click", function () {
 
-        // Remove active from all
-        filters.forEach(item => {
-            item.classList.remove("active");
-        });
+        // Remove active class from all filters
+        filters.forEach(btn => btn.classList.remove("active"));
 
-        // Add active to clicked button
-        filter.classList.add("active");
+        // Add active class to clicked filter
+        this.classList.add("active");
 
-        const selectedCategory = filter.dataset.filter;
+        const selectedCategory = this.dataset.filter;
 
-        projects.forEach(project => {
+        projectCards.forEach(card => {
 
-            const projectCategory = project.dataset.category;
+            const projectCategory = card.dataset.category;
 
             if (
                 selectedCategory === "all" ||
-                selectedCategory === projectCategory
+                projectCategory === selectedCategory
             ) {
-
-                project.style.display = "block";
-
+                card.style.display = "";
             } else {
-
-                project.style.display = "none";
-
+                card.style.display = "none";
             }
 
         });

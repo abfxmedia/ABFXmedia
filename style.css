@@ -1071,7 +1071,7 @@ button {
 .about-image .profile-image {
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    filter: grayscale(100%);
+    filter: grayscale(0%);
 }
 .about-image-label {
     position: absolute;

@@ -203,11 +203,40 @@ projectCards.forEach(card => {
 
             events: {
 
-                onReady: function (event) {
-                    event.target.mute();
-                    event.target.playVideo();
-                    updateCounter();
-                },
+               onReady: function (event) {
+
+    // Default mute
+    event.target.mute();
+    event.target.playVideo();
+
+    const volumeButton = document.getElementById("heroVolumeButton");
+
+    if (volumeButton) {
+
+        volumeButton.textContent = "🔇";
+
+        volumeButton.onclick = function () {
+
+            if (heroPlayer.isMuted()) {
+
+                heroPlayer.unMute();
+                heroPlayer.setVolume(100);
+
+                volumeButton.textContent = "🔊";
+
+            } else {
+
+                heroPlayer.mute();
+
+                volumeButton.textContent = "🔇";
+
+            }
+
+        };
+    }
+
+    updateCounter();
+},
 
                 onStateChange: function (event) {
 

@@ -165,18 +165,61 @@ button {
 /* CONTAINER */
 
 /* =========================
-   KEEP CONTENT INSIDE BOUNDARY
+   HERO CONTAINER FIX
 ========================= */
 
-.hero > .container {
+.hero .container {
     position: relative !important;
     z-index: 2 !important;
 
-    width: min(1200px, 92%) !important;
+    width: 92% !important;
     max-width: 1200px !important;
 
     margin-left: auto !important;
     margin-right: auto !important;
+}
+
+.hero-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 390px) !important;
+
+    align-items: center !important;
+    gap: 60px !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.hero-content {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.hero-visual {
+    width: 100% !important;
+    min-width: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding-right: 0 !important;
+}
+
+.hero-video {
+    width: 100% !important;
+    max-width: 390px !important;
+    aspect-ratio: 9 / 12 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+
+    .hero-visual {
+        justify-content: center !important;
+    }
 }
 
 .hero-grid {

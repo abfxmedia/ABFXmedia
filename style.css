@@ -496,30 +496,8 @@ button {
 
 
 .hero-play {
-    position: absolute !important;
-
-    top: 50% !important;
-    left: 50% !important;
-
-    transform: translate(-50%, -50%) !important;
-
-    width: 62px !important;
-    height: 62px !important;
-
-    border-radius: 50% !important;
-
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    background: #ff1f35 !important;
-
-    color: #ffffff !important;
-
-    font-size: 16px !important;
+    display: none !important;
 }
-
 
 .hero-video-bottom {
     position: absolute !important;

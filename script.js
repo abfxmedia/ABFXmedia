@@ -185,3 +185,105 @@ projectCards.forEach(card => {
     }
 
 });
+
+/* ==============================
+   HERO YOUTUBE SHOWREEL - 5 VIDEOS
+============================== */
+
+(function () {
+
+    const heroVideos = [
+        "_0kVG9PrGW4",
+        "JpF0-hx4t1o",
+        "wiv3O0V9HN4",
+        "LnmdkBWADhg",
+        "CVjk0ES380o"
+    ];
+
+    let currentVideo = 0;
+    let heroPlayer;
+
+    const counter = document.getElementById("heroVideoCounter");
+
+    function updateCounter() {
+        if (counter) {
+            counter.textContent =
+                String(currentVideo + 1).padStart(2, "0") +
+                " / 05";
+        }
+    }
+
+    function createHeroPlayer() {
+
+        heroPlayer = new YT.Player("heroShowreelPlayer", {
+
+            videoId: heroVideos[currentVideo],
+
+            playerVars: {
+                autoplay: 1,
+                controls: 0,
+                disablekb: 1,
+                fs: 0,
+                playsinline: 1,
+                rel: 0,
+                modestbranding: 1
+            },
+
+            events: {
+
+                onReady: function (event) {
+                    event.target.mute();
+                    event.target.playVideo();
+                    updateCounter();
+                },
+
+                onStateChange: function (event) {
+
+                    if (event.data === YT.PlayerState.ENDED) {
+
+                        currentVideo++;
+
+                        if (currentVideo >= heroVideos.length) {
+                            currentVideo = 0;
+                        }
+
+                        updateCounter();
+
+                        heroPlayer.loadVideoById({
+                            videoId: heroVideos[currentVideo]
+                        });
+
+                    }
+
+                },
+
+                onError: function () {
+                    currentVideo = (currentVideo + 1) % heroVideos.length;
+                    updateCounter();
+
+                    heroPlayer.loadVideoById({
+                        videoId: heroVideos[currentVideo]
+                    });
+                }
+
+            }
+
+        });
+
+    }
+
+    window.onYouTubeIframeAPIReady = createHeroPlayer;
+
+    if (window.YT && window.YT.Player) {
+        createHeroPlayer();
+    } else {
+
+        const tag = document.createElement("script");
+
+        tag.src = "https://www.youtube.com/iframe_api";
+
+        document.head.appendChild(tag);
+
+    }
+
+})();

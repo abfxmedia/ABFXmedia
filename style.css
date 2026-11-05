@@ -2264,3 +2264,135 @@ button {
         right: 15px;
     }
 }
+
+
+/* ==============================
+   ABFX.MEDIA PROJECT VIDEO POPUP
+============================== */
+
+.project-card {
+    cursor: pointer;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* MORE PROJECTS */
+
+.more-projects {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.more-projects a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 25px;
+    border: 1px solid #e50914;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    transition: 0.3s ease;
+}
+
+.more-projects a span {
+    color: #e50914;
+    font-size: 18px;
+}
+
+.more-projects a:hover {
+    background: #e50914;
+    color: #fff;
+}
+
+.more-projects a:hover span {
+    color: #fff;
+}
+
+.more-projects p {
+    color: #888;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+/* VIDEO POPUP */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.96);
+}
+
+.video-modal.active {
+    display: flex;
+}
+
+.video-modal-content {
+    width: min(900px, 90vw);
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.video-modal-content.vertical-video {
+    width: min(390px, 85vw);
+    aspect-ratio: 9 / 16;
+}
+
+.video-modal-content iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-close {
+    position: absolute;
+    top: 18px;
+    right: 30px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    font-size: 42px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.video-close:hover {
+    color: #e50914;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .video-modal {
+        padding: 15px;
+    }
+
+    .video-modal-content {
+        width: 100%;
+    }
+
+    .video-modal-content.vertical-video {
+        width: min(85vw, 360px);
+    }
+
+    .video-close {
+        top: 12px;
+        right: 16px;
+    }
+
+    .more-projects {
+        margin-top: 35px;
+    }
+}

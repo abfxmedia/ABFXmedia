@@ -1,150 +1,154 @@
-/* =========================
-   PROJECT FILTER
-========================= */
 
-/* PROJECT FILTERS */
+document.addEventListener("DOMContentLoaded", function () {
 
-const filters = document.querySelectorAll(".filter");
-const projectCards = document.querySelectorAll(".project-card");
+    /* =========================
+       PROJECT FILTERS
+    ========================= */
 
-filters.forEach(filter => {
+    const filters = document.querySelectorAll(".filter");
+    const projectCards = document.querySelectorAll(".project-card");
 
-    filter.addEventListener("click", function () {
+    filters.forEach(filter => {
 
-        // Remove active class from all filters
-        filters.forEach(btn => btn.classList.remove("active"));
+        filter.addEventListener("click", function () {
 
-        // Add active class to clicked filter
-        this.classList.add("active");
+            filters.forEach(btn => btn.classList.remove("active"));
 
-        const selectedCategory = this.dataset.filter;
+            this.classList.add("active");
 
-        projectCards.forEach(card => {
+            const selectedCategory = this.dataset.filter;
 
-            const projectCategory = card.dataset.category;
+            projectCards.forEach(card => {
 
-            if (
-                selectedCategory === "all" ||
-                projectCategory === selectedCategory
-            ) {
-                card.style.display = "";
-            } else {
-                card.style.display = "none";
-            }
+                const projectCategory = card.dataset.category;
+
+                if (
+                    selectedCategory === "all" ||
+                    projectCategory === selectedCategory
+                ) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
 
         });
 
     });
 
-});
+
+    /* =========================
+       YOUTUBE VIDEO MODAL
+    ========================= */
+
+    const videoModal = document.getElementById("videoModal");
+    const videoFrame = document.getElementById("projectVideo");
+    const videoClose = document.getElementById("videoClose");
+    const videoContent = document.getElementById("videoModalContent");
+
+    if (videoModal && videoFrame && videoClose && videoContent) {
+
+        projectCards.forEach(card => {
+
+            card.addEventListener("click", function () {
+
+                const videoId = this.dataset.video;
+                const videoType = this.dataset.type;
+
+                if (!videoId) return;
+
+                videoFrame.src =
+                    "https://www.youtube.com/embed/" +
+                    encodeURIComponent(videoId) +
+                    "?autoplay=1&mute=1&rel=0&playsinline=1";
+
+                videoContent.classList.toggle(
+                    "vertical-video",
+                    videoType === "vertical"
+                );
+
+                videoModal.classList.add("active");
+
+                document.body.style.overflow = "hidden";
+
+            });
+
+        });
 
 
-/* =========================
-   VIDEO MODAL
-========================= */
+        /* CLOSE VIDEO */
 
-const projectCards = document.querySelectorAll(".project-card");
+        function closeVideo() {
 
-const videoModal = document.getElementById("videoModal");
-const modalVideo = document.getElementById("modalVideo");
-const closeModal = document.getElementById("closeModal");
+            videoModal.classList.remove("active");
 
+            videoFrame.src = "";
 
-projectCards.forEach(project => {
+            videoContent.classList.remove("vertical-video");
 
-    project.addEventListener("click", () => {
+            document.body.style.overflow = "";
 
-        const videoSource = project.dataset.video;
-
-        if (!videoSource) {
-            return;
         }
 
-        modalVideo.src = videoSource;
-
-        videoModal.classList.add("active");
-
-        modalVideo.play();
-
-        document.body.style.overflow = "hidden";
-
-    });
-
-});
+        videoClose.addEventListener("click", closeVideo);
 
 
-/* =========================
-   CLOSE VIDEO
-========================= */
+        /* CLICK OUTSIDE VIDEO */
 
-function closeVideo() {
+        videoModal.addEventListener("click", function (event) {
 
-    modalVideo.pause();
+            if (event.target === videoModal) {
+                closeVideo();
+            }
 
-    modalVideo.currentTime = 0;
-
-    modalVideo.src = "";
-
-    videoModal.classList.remove("active");
-
-    document.body.style.overflow = "";
-
-}
+        });
 
 
-closeModal.addEventListener("click", closeVideo);
+        /* ESC KEY */
 
+        document.addEventListener("keydown", function (event) {
 
-/* Click outside video */
+            if (
+                event.key === "Escape" &&
+                videoModal.classList.contains("active")
+            ) {
+                closeVideo();
+            }
 
-videoModal.addEventListener("click", event => {
-
-    if (event.target === videoModal) {
-
-        closeVideo();
+        });
 
     }
 
-});
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuButton && navLinks) {
+
+        menuButton.addEventListener("click", function () {
+
+            navLinks.classList.toggle("mobile-open");
+
+        });
 
 
-/* ESC KEY */
+        /* CLOSE MOBILE MENU */
 
-document.addEventListener("keydown", event => {
+        document.querySelectorAll(".nav-links a").forEach(link => {
 
-    if (event.key === "Escape") {
+            link.addEventListener("click", function () {
 
-        closeVideo();
+                navLinks.classList.remove("mobile-open");
+
+            });
+
+        });
 
     }
-
-});
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-const menuButton = document.getElementById("menuButton");
-const navLinks = document.querySelector(".nav-links");
-
-menuButton.addEventListener("click", () => {
-
-    navLinks.classList.toggle("mobile-open");
-
-});
-
-
-/* =========================
-   CLOSE MOBILE MENU
-========================= */
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        navLinks.classList.remove("mobile-open");
-
-    });
 
 });

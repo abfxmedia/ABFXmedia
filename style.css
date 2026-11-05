@@ -1069,9 +1069,12 @@ button {
 }
 
 .about-image .profile-image {
+    width: 100%;
+    max-width: 400px;
     aspect-ratio: 4 / 5;
+    height: auto;
+    display: block;
     object-fit: cover;
-    filter: grayscale(100%);
 }
 .about-image-label {
     position: absolute;
